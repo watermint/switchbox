@@ -1,0 +1,69 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  xgo:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [ windows/amd64, linux/amd64, linux/arm64, darwin/amd64, darwin/arm64 ]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+          check-latest: true
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: build-preflight
+        run: go run sbx.go dev build preflight
+        env:
+          TOOLBOX_APPKEYS: '${{ secrets.TOOLBOX_APPKEYS }}'
+          TOOLBOX_BUILDERKEY: '${{ secrets.TOOLBOX_BUILDERKEY }}'
+          TOOLBOX_BUILD_TARGET: '${{ matrix.target }}'
+
+      - name: build-info
+        run: go run sbx.go dev build info -fail-fast
+        env:
+          TOOLBOX_APPKEYS: '${{ secrets.TOOLBOX_APPKEYS }}'
+          TOOLBOX_BUILDERKEY: '${{ secrets.TOOLBOX_BUILDERKEY }}'
+          TOOLBOX_BUILD_TARGET: '${{ matrix.target }}'
+
+      - name: build
+        uses: crazy-max/ghaction-xgo@v3
+        with:
+          xgo_version: latest
+          go_version: 1.21
+          dest: build
+          prefix: sbx
+          targets: ${{ matrix.target }}
+          v: false
+          x: false
+          race: false
+          ldflags: -s -w
+          buildmode: default
+          trimpath: true
+
+      - name: test binary
+        if: matrix.target == 'linux/amd64'
+        run: |
+          ./build/sbx-linux-amd64 dev test resources
+
+      - name: package & ship
+        run: |
+          mkdir -p dist
+          go run sbx.go dev build package -executable-name sbx -build-path build -dist-path dist -deploy-path /watermint-switchbox-build -experiment suppress_progress
+        env:
+          TOOLBOX_DEPLOY_TOKEN: '${{ secrets.TOOLBOX_DEPLOY_TOKEN }}'
+          TOOLBOX_BUILD_TARGET: '${{ matrix.target }}'
