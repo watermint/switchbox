@@ -4,8 +4,8 @@ package catalogue
 
 {{ $importAliases := .ImportAliases }}
 import (
-    infra_recipe_rc_recipe "github.com/watermint/gearbox/infra/gb_recipe"
-    {{range $import := .Imports}}{{ index $importAliases $import }} "github.com/watermint/gearbox/{{ $import }}"
+    infra_recipe_rc_recipe "github.com/watermint/switchbox/infra/sb_recipe"
+    {{range $import := .Imports}}{{ index $importAliases $import }} "github.com/watermint/switchbox/{{ $import }}"
     {{end}}
 )
 

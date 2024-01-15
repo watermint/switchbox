@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	switchboxcatalogue "github.com/watermint/switchbox/catalogue"
 	sb_definitions "github.com/watermint/switchbox/infra/sb_definitions"
 	"github.com/watermint/switchbox/resources"
 	toolboxcatalogue "github.com/watermint/toolbox/catalogue"
@@ -47,17 +48,17 @@ func loadCatalogue() rc_catalogue.Catalogue {
 			}
 		}
 	}
-	//for _, r := range gearboxcatalogue.AutoDetectedRecipes() {
-	//	recipes = append(recipes, r)
-	//}
+	for _, r := range switchboxcatalogue.AutoDetectedRecipes() {
+		recipes = append(recipes, r)
+	}
 	ingredients := make([]rc_recipe.Recipe, 0)
-	//ingredients = append(ingredients, gearboxcatalogue.AutoDetectedIngredients()...)
+	//ingredients = append(ingredients, switchboxcatalogue.AutoDetectedIngredients()...)
 	ingredients = append(ingredients, toolboxcatalogue.AutoDetectedIngredients()...)
 	messages := make([]interface{}, 0)
-	//messages = append(messages, gearboxcatalogue.AutoDetectedMessageObjects()...)
+	messages = append(messages, switchboxcatalogue.AutoDetectedMessageObjects()...)
 	messages = append(messages, toolboxcatalogue.AutoDetectedMessageObjects()...)
 	features := make([]app_feature.OptIn, 0)
-	//features = append(features, gearboxcatalogue.AutoDetectedFeatures()...)
+	features = append(features, switchboxcatalogue.AutoDetectedFeatures()...)
 	features = append(features, toolboxcatalogue.AutoDetectedFeatures()...)
 
 	return rc_catalogue_impl.NewCatalogue(recipes, ingredients, messages, features)
