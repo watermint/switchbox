@@ -11,7 +11,7 @@ The multi-purpose utility command-line tool for web services including Dropbox, 
 
 # Licensing & Disclaimers
 
-watermint gearbox is licensed under the Apache License, Version 2.0.
+watermint switchbox is licensed under the Apache License, Version 2.0.
 Please see LICENSE.md or LICENSE.txt for more detail.
 
 Please carefully note:
@@ -93,12 +93,19 @@ Available commands:
 
 | Command | Description              | Notes |
 |---------|--------------------------|-------|
+| deploy  | Deploy commands          |       |
 | license | Show license information |       |
 | version | Show version             |       |
 
 ```
 
 # Commands
+
+## Dropbox (Individual account)
+
+| Command                                   | Description                            |
+|-------------------------------------------|----------------------------------------|
+| [deploy bin](docs/commands/deploy-bin.md) | Deploy binary from Dropbox shared link |
 
 ## Utilities
 

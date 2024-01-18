@@ -1,4 +1,4 @@
-# watermint gearbox
+# watermint switchbox
 
 ![watermint toolbox]({{ site.baseurl }}/images/logo.png){: width="160" }
 
@@ -6,7 +6,7 @@ The multi-purpose utility command-line tool for web services including Dropbox, 
 
 # Do more with the watermint toolbox
 
-The watermint toolbox has 2 commands to solve your daily tasks. For example, if you are an admin of Dropbox for teams and need to manage a group. You can bulk create groups or bulk add members to groups via group commands.
+The watermint toolbox has 3 commands to solve your daily tasks. For example, if you are an admin of Dropbox for teams and need to manage a group. You can bulk create groups or bulk add members to groups via group commands.
 
 ![Demo]({{ site.baseurl }}/images/demo.gif)
 
@@ -33,7 +33,7 @@ brew install toolbox
 
 # Licensing & Disclaimers
 
-watermint gearbox is licensed under the Apache License, Version 2.0.
+watermint switchbox is licensed under the Apache License, Version 2.0.
 Please see LICENSE.md or LICENSE.txt for more detail.
 
 Please carefully note:

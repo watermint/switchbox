@@ -6,6 +6,12 @@ lang: en
 
 # Commands
 
+## Dropbox (Individual account)
+
+| Command                                                   | Description                            |
+|-----------------------------------------------------------|----------------------------------------|
+| [deploy bin]({{ site.baseurl }}/commands/deploy-bin.html) | Deploy binary from Dropbox shared link |
+
 ## Utilities
 
 | Command                                             | Description              |

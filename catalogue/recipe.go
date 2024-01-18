@@ -4,8 +4,11 @@ package catalogue
 
 import (
 	infra_recipe_rc_recipe "github.com/watermint/switchbox/infra/sb_recipe"
+	recipedeploy "github.com/watermint/switchbox/recipe/deploy"
 )
 
 func AutoDetectedRecipes() []infra_recipe_rc_recipe.Recipe {
-	return []infra_recipe_rc_recipe.Recipe{}
+	return []infra_recipe_rc_recipe.Recipe{
+		&recipedeploy.Bin{},
+	}
 }

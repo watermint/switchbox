@@ -6,7 +6,7 @@ require (
 	dario.cat/mergo v1.0.0 // indirect
 	git.mills.io/prologic/bitcask v1.0.2 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
-	github.com/ProtonMail/go-crypto v0.0.0-20230923063757-afb1ddc0824c // indirect
+	github.com/ProtonMail/go-crypto v1.0.0 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/abcum/lcp v0.0.0-20201209214815-7a3f3840be81 // indirect
 	github.com/acarl005/stripansi v0.0.0-20180116102854-5a71ef0e047d // indirect
@@ -48,7 +48,7 @@ require (
 	github.com/google/flatbuffers v23.5.26+incompatible // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20231229205709-960ae82b1e42 // indirect
+	github.com/google/pprof v0.0.0-20240117000934-35fc243c5815 // indirect
 	github.com/ikawaha/kagome-dict v1.0.9 // indirect
 	github.com/ikawaha/kagome/v2 v2.9.4 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
@@ -96,7 +96,7 @@ require (
 	github.com/vbauerster/mpb/v5 v5.4.0 // indirect
 	github.com/watermint/bwlimit v0.0.0-20170711090810-815207958550 // indirect
 	github.com/watermint/prose/v3 v3.0.1 // indirect
-	github.com/watermint/toolbox v0.0.0-20240115081339-49837ec8d991 // indirect
+	github.com/watermint/toolbox v0.0.0-20240118154133-5055734d9191 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.opencensus.io v0.24.0 // indirect
