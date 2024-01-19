@@ -7,6 +7,7 @@ import (
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_auth"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_conn"
 	"github.com/watermint/toolbox/essentials/log/esl"
+	"github.com/watermint/toolbox/essentials/terminal/es_window"
 	"github.com/watermint/toolbox/infra/control/app_control"
 	"github.com/watermint/toolbox/infra/data/da_json"
 	"github.com/watermint/toolbox/quality/infra/qt_errors"
@@ -18,6 +19,7 @@ type Run struct {
 	Runbook     da_json.JsonInput
 	Deploy      da_json.JsonInput
 	ForceUpdate bool
+	Hide        bool
 }
 
 func (z *Run) Preset() {
@@ -32,6 +34,11 @@ func (z *Run) Preset() {
 
 func (z *Run) Exec(c app_control.Control) error {
 	l := c.Log()
+	if z.Hide {
+		es_window.HideConsole()
+		l.Info("Hide console")
+	}
+
 	var runbook *sb_dispatch.BinRunbook
 	if v, err := z.Runbook.Unmarshal(); err != nil {
 		return err
