@@ -16,5 +16,6 @@
 /resources/keys/toolbox.appkeys
 /resources/keys/toolbox.appkeys.secret
 /test/dev
+/test/data
 /test/results
 /docs/.jekyll-cache

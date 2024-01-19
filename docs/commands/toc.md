@@ -8,9 +8,10 @@ lang: en
 
 ## Dropbox (Individual account)
 
-| Command                                                   | Description                            |
-|-----------------------------------------------------------|----------------------------------------|
-| [deploy bin]({{ site.baseurl }}/commands/deploy-bin.html) | Deploy binary from Dropbox shared link |
+| Command                                                         | Description                            |
+|-----------------------------------------------------------------|----------------------------------------|
+| [deploy update]({{ site.baseurl }}/commands/deploy-update.html) | Update binary from Dropbox shared link |
+| [dispatch run]({{ site.baseurl }}/commands/dispatch-run.html)   | Run the latest version of the binary   |
 
 ## Utilities
 

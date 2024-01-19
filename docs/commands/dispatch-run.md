@@ -1,14 +1,12 @@
 ---
 layout: command
-title: Command `deploy bin`
+title: Command `dispatch run`
 lang: en
 ---
 
-# deploy bin
+# dispatch run
 
-Deploy binary from Dropbox shared link 
-
-The folder structure must be `PREFIX-VERSION/PREFIX-VERSION-SUFFIX.zip`. For example, `myapp-1.0.0/myapp-1.0.0-windows.zip`.
+Run the latest version of the binary 
 
 # Security
 
@@ -70,12 +68,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe deploy bin -binary-name NAME -cellar-path /LOCAL/PATH/TO/CELLAR -deploy-path /LOCAL/PATH/TO/DEPLOY -prefix PREFIX -suffix SUFFIX -source-url SOURCE_URL 
+.\sbx.exe dispatch run -deploy /LOCAL/PATH/TO/DEPLOY.json -runbook /LOCAL/PATH/TO/RUN.json
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx deploy bin -binary-name NAME -cellar-path /LOCAL/PATH/TO/CELLAR -deploy-path /LOCAL/PATH/TO/DEPLOY -prefix PREFIX -suffix SUFFIX -source-url SOURCE_URL 
+$HOME/Desktop/sbx dispatch run -deploy /LOCAL/PATH/TO/DEPLOY.json -runbook /LOCAL/PATH/TO/RUN.json
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -86,16 +84,11 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option             | Description                                           | Default |
-|--------------------|-------------------------------------------------------|---------|
-| `-binary-name`     | Executable binary name                                |         |
-| `-cellar-path`     | Cellar path                                           |         |
-| `-deploy-path`     | Deploy path                                           |         |
-| `-peer`            | Account alias                                         | default |
-| `-prefix`          | Prefix of the binary zip file                         |         |
-| `-source-password` | Shared link password if required                      |         |
-| `-source-url`      | Source Dropbox shared link URL of the binary zip file |         |
-| `-suffix`          | Suffix of the binary zip file                         |         |
+| Option     | Description               | Default |
+|------------|---------------------------|---------|
+| `-deploy`  | Path to deploy JSON file  |         |
+| `-peer`    | Account alias             | default |
+| `-runbook` | Path to runbook JSON file |         |
 
 ## Common options:
 

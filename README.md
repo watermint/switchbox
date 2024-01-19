@@ -91,11 +91,12 @@ Usage:
 Available commands:
 ===================
 
-| Command | Description              | Notes |
-|---------|--------------------------|-------|
-| deploy  | Deploy commands          |       |
-| license | Show license information |       |
-| version | Show version             |       |
+| Command  | Description              | Notes |
+|----------|--------------------------|-------|
+| deploy   | Deploy commands          |       |
+| dispatch | Dispatch commands        |       |
+| license  | Show license information |       |
+| version  | Show version             |       |
 
 ```
 
@@ -103,9 +104,10 @@ Available commands:
 
 ## Dropbox (Individual account)
 
-| Command                                   | Description                            |
-|-------------------------------------------|----------------------------------------|
-| [deploy bin](docs/commands/deploy-bin.md) | Deploy binary from Dropbox shared link |
+| Command                                         | Description                            |
+|-------------------------------------------------|----------------------------------------|
+| [deploy update](docs/commands/deploy-update.md) | Update binary from Dropbox shared link |
+| [dispatch run](docs/commands/dispatch-run.md)   | Run the latest version of the binary   |
 
 ## Utilities
 

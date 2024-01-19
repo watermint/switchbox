@@ -6,5 +6,5 @@ import (
 )
 
 func TestBin_Exec(t *testing.T) {
-	qtr_endtoend.TestRecipe(t, &Bin{})
+	qtr_endtoend.TestRecipe(t, &Update{})
 }
