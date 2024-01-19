@@ -21,6 +21,7 @@ func (z *Update) Preset() {
 		dbx_auth.ScopeFilesMetadataRead,
 		dbx_auth.ScopeSharingRead,
 	)
+	z.Deploy.SetModel(&sb_deploy.BinSrcDropboxDstLocal{})
 }
 
 func (z *Update) Exec(c app_control.Control) error {
