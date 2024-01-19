@@ -146,6 +146,10 @@ func (z *Bin) extractLatest(c app_control.Control, version es_version.Version, d
 	err = es_zip.Extract(l, downloadPath, cellarPath)
 	l.Debug("Extracted", esl.Error(err), esl.String("cellarPath", cellarPath))
 
+	if err := os.Remove(downloadPath); err != nil {
+		l.Warn("Unable to remove downloaded file", esl.Error(err))
+	}
+
 	return cellarPath, err
 }
 
