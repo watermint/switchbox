@@ -25,14 +25,14 @@ func (z *Update) Preset() {
 }
 
 func (z *Update) Exec(c app_control.Control) error {
-	var deploy sb_deploy.BinSrcDropboxDstLocal
+	var deploy *sb_deploy.BinSrcDropboxDstLocal
 	if v, err := z.Deploy.Unmarshal(); err != nil {
 		return err
 	} else {
-		deploy = v.(sb_deploy.BinSrcDropboxDstLocal)
+		deploy = v.(*sb_deploy.BinSrcDropboxDstLocal)
 	}
 
-	worker := sb_deploy.NewBinSrcDropboxDstLocal(deploy, c, z.Peer.Client())
+	worker := sb_deploy.NewBinSrcDropboxDstLocal(*deploy, c, z.Peer.Client())
 	if z.Force {
 		if err := worker.UpdateForce(); err != nil {
 			return err

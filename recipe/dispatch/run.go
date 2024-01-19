@@ -32,20 +32,20 @@ func (z *Run) Preset() {
 
 func (z *Run) Exec(c app_control.Control) error {
 	l := c.Log()
-	var runbook sb_dispatch.BinRunbook
+	var runbook *sb_dispatch.BinRunbook
 	if v, err := z.Runbook.Unmarshal(); err != nil {
 		return err
 	} else {
-		runbook = v.(sb_dispatch.BinRunbook)
+		runbook = v.(*sb_dispatch.BinRunbook)
 	}
-	var deploy sb_deploy.BinSrcDropboxDstLocal
+	var deploy *sb_deploy.BinSrcDropboxDstLocal
 	if v, err := z.Deploy.Unmarshal(); err != nil {
 		return err
 	} else {
-		deploy = v.(sb_deploy.BinSrcDropboxDstLocal)
+		deploy = v.(*sb_deploy.BinSrcDropboxDstLocal)
 	}
 
-	deployWorker := sb_deploy.NewBinSrcDropboxDstLocal(deploy, c, z.Peer.Client())
+	deployWorker := sb_deploy.NewBinSrcDropboxDstLocal(*deploy, c, z.Peer.Client())
 	if err := deployWorker.UpdateIfRequired(); err != nil {
 		return err
 	}
