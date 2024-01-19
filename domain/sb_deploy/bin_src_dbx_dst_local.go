@@ -50,6 +50,9 @@ type BinSrcDropboxDstLocalWorker interface {
 	// UpdateIfRequired Update if required
 	UpdateIfRequired() (err error)
 
+	// UpdateForce Update forcefully
+	UpdateForce() (err error)
+
 	// GetLocalLatest Get local latest version and download automatically if
 	// no local version found. But this will not check remote versions if local
 	// version is found.
@@ -114,7 +117,7 @@ func (z binSrcDropboxDstLocalWorkerImpl) BinaryName() string {
 	}
 }
 
-func (z binSrcDropboxDstLocalWorkerImpl) UpdateIfRequired() (err error) {
+func (z binSrcDropboxDstLocalWorkerImpl) update(force bool) (err error) {
 	l := z.ctl.Log()
 
 	if err := os.MkdirAll(z.recipe.CellarPath, 0755); err != nil {
@@ -136,7 +139,7 @@ func (z binSrcDropboxDstLocalWorkerImpl) UpdateIfRequired() (err error) {
 	localVersionLatest := es_version.Max(localVersions...)
 	remoteVersionLatest := es_version.Max(remoteVersions...)
 
-	if localVersionLatest.Equals(remoteVersionLatest) {
+	if !force && localVersionLatest.Equals(remoteVersionLatest) {
 		l.Info("Already latest version", esl.String("localVersion", localVersionLatest.String()),
 			esl.String("localPath", localVersionPaths[localVersionLatest.String()]),
 			esl.String("remoteVersion", remoteVersionLatest.String()),
@@ -160,6 +163,14 @@ func (z binSrcDropboxDstLocalWorkerImpl) UpdateIfRequired() (err error) {
 	l.Info("Extracted", esl.String("path", cellarPath))
 
 	return nil
+}
+
+func (z binSrcDropboxDstLocalWorkerImpl) UpdateForce() (err error) {
+	return z.update(true)
+}
+
+func (z binSrcDropboxDstLocalWorkerImpl) UpdateIfRequired() (err error) {
+	return z.update(false)
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) GetLocalLatest() (binaryPath string, version es_version.Version, err error) {

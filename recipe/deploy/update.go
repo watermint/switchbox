@@ -4,20 +4,15 @@ import (
 	"github.com/watermint/switchbox/domain/sb_deploy"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_auth"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_conn"
-	"github.com/watermint/toolbox/essentials/model/mo_path"
-	"github.com/watermint/toolbox/essentials/model/mo_string"
 	"github.com/watermint/toolbox/infra/control/app_control"
+	"github.com/watermint/toolbox/infra/data/da_json"
 	"github.com/watermint/toolbox/quality/infra/qt_errors"
 )
 
 type Update struct {
-	Peer           dbx_conn.ConnScopedIndividual
-	SourceUrl      string
-	SourcePassword mo_string.OptionalString
-	Prefix         string
-	Suffix         string
-	CellarPath     mo_path.FileSystemPath
-	BinaryName     string
+	Peer   dbx_conn.ConnScopedIndividual
+	Deploy da_json.JsonInput
+	Force  bool
 }
 
 func (z *Update) Preset() {
@@ -29,18 +24,22 @@ func (z *Update) Preset() {
 }
 
 func (z *Update) Exec(c app_control.Control) error {
-	recipe := sb_deploy.BinSrcDropboxDstLocal{
-		SourceUrl:      z.SourceUrl,
-		SourcePassword: z.SourcePassword.Value(),
-		BinaryName:     z.BinaryName,
-		Prefix:         z.Prefix,
-		Suffix:         z.Suffix,
-		CellarPath:     z.CellarPath.Path(),
+	var deploy sb_deploy.BinSrcDropboxDstLocal
+	if v, err := z.Deploy.Unmarshal(); err != nil {
+		return err
+	} else {
+		deploy = v.(sb_deploy.BinSrcDropboxDstLocal)
 	}
 
-	worker := sb_deploy.NewBinSrcDropboxDstLocal(recipe, c, z.Peer.Client())
-	if err := worker.UpdateIfRequired(); err != nil {
-		return err
+	worker := sb_deploy.NewBinSrcDropboxDstLocal(deploy, c, z.Peer.Client())
+	if z.Force {
+		if err := worker.UpdateForce(); err != nil {
+			return err
+		}
+	} else {
+		if err := worker.UpdateIfRequired(); err != nil {
+			return err
+		}
 	}
 	return nil
 }

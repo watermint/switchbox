@@ -2,7 +2,6 @@ package dispatch
 
 import (
 	"bufio"
-	"encoding/json"
 	"github.com/watermint/switchbox/domain/sb_deploy"
 	"github.com/watermint/switchbox/domain/sb_dispatch"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_auth"
@@ -11,14 +10,14 @@ import (
 	"github.com/watermint/toolbox/infra/control/app_control"
 	"github.com/watermint/toolbox/infra/data/da_json"
 	"github.com/watermint/toolbox/quality/infra/qt_errors"
-	"os"
 	"os/exec"
 )
 
 type Run struct {
-	Peer    dbx_conn.ConnScopedIndividual
-	Runbook da_json.JsonInput
-	Deploy  da_json.JsonInput
+	Peer        dbx_conn.ConnScopedIndividual
+	Runbook     da_json.JsonInput
+	Deploy      da_json.JsonInput
+	ForceUpdate bool
 }
 
 func (z *Run) Preset() {
@@ -34,24 +33,16 @@ func (z *Run) Preset() {
 func (z *Run) Exec(c app_control.Control) error {
 	l := c.Log()
 	var runbook sb_dispatch.BinRunbook
-	rbContent, err := os.ReadFile(z.Runbook.FilePath())
-	if err != nil {
-		l.Warn("Unable to read runbook", esl.Error(err))
+	if v, err := z.Runbook.Unmarshal(); err != nil {
 		return err
-	}
-	if err := json.Unmarshal(rbContent, &runbook); err != nil {
-		l.Warn("Unable to parse runbook", esl.Error(err))
-		return err
+	} else {
+		runbook = v.(sb_dispatch.BinRunbook)
 	}
 	var deploy sb_deploy.BinSrcDropboxDstLocal
-	deployContent, err := os.ReadFile(z.Deploy.FilePath())
-	if err != nil {
-		l.Warn("Unable to read deploy", esl.Error(err))
+	if v, err := z.Deploy.Unmarshal(); err != nil {
 		return err
-	}
-	if err := json.Unmarshal(deployContent, &deploy); err != nil {
-		l.Warn("Unable to parse deploy", esl.Error(err))
-		return err
+	} else {
+		deploy = v.(sb_deploy.BinSrcDropboxDstLocal)
 	}
 
 	deployWorker := sb_deploy.NewBinSrcDropboxDstLocal(deploy, c, z.Peer.Client())

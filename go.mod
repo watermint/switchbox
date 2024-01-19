@@ -96,7 +96,7 @@ require (
 	github.com/vbauerster/mpb/v5 v5.4.0 // indirect
 	github.com/watermint/bwlimit v0.0.0-20170711090810-815207958550 // indirect
 	github.com/watermint/prose/v3 v3.0.1 // indirect
-	github.com/watermint/toolbox v0.0.0-20240118154133-5055734d9191 // indirect
+	github.com/watermint/toolbox v0.0.0-20240119103943-6171b556b039 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.opencensus.io v0.24.0 // indirect
@@ -105,7 +105,7 @@ require (
 	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/arch v0.7.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
-	golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3 // indirect
+	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
 	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.20.0 // indirect

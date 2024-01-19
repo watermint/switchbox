@@ -517,6 +517,8 @@ github.com/watermint/toolbox v0.0.0-20240118152519-e4593ba44e29 h1:3n0EwF3y6z5l8
 github.com/watermint/toolbox v0.0.0-20240118152519-e4593ba44e29/go.mod h1:O4pxJHiFGbwBNc1DmK+Zl8V/lwtgyKfbZATFeHUrCvA=
 github.com/watermint/toolbox v0.0.0-20240118154133-5055734d9191 h1:2Fija4QTdfdIgj8J4yQfxnRn/nIAwM2PSq8EaRKyCBw=
 github.com/watermint/toolbox v0.0.0-20240118154133-5055734d9191/go.mod h1:uBIddeUTayLBvknBwZTx+SLbrF/FDLhHj8O1/7gLt4Y=
+github.com/watermint/toolbox v0.0.0-20240119103943-6171b556b039 h1:uSViipRKkzaMwQnS0HV7OyCUy6OwQbMQKDRtuNH+fmg=
+github.com/watermint/toolbox v0.0.0-20240119103943-6171b556b039/go.mod h1:uBIddeUTayLBvknBwZTx+SLbrF/FDLhHj8O1/7gLt4Y=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
@@ -584,6 +586,8 @@ golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6/go.mod h1:3jZMyOhIsHpP37uCMk
 golang.org/x/exp v0.0.0-20200228211341-fcea875c7e85/go.mod h1:4M0jN8W1tt0AVLNr8HDosyJCDCDuyL9N9+3m7wDWgKw=
 golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3 h1:hNQpMuAJe5CtcUqCXaWga3FHu+kQvCqcsoVaQgSV60o=
 golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
+golang.org/x/exp v0.0.0-20240119083558-1b970713d09a h1:Q8/wZp0KX97QFTc2ywcOE0YRjZPVIx+MXInMzdvQqcA=
+golang.org/x/exp v0.0.0-20240119083558-1b970713d09a/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
 golang.org/x/image v0.0.0-20190227222117-0694c2d4d067/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
 golang.org/x/image v0.0.0-20190802002840-cff245a6509b/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/image v0.15.0 h1:kOELfmgrmJlw4Cdb7g/QGuB3CvDrXbqEIww/pNtNBm8=
