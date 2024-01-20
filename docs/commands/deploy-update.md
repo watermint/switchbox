@@ -84,11 +84,12 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option    | Description           | Default |
-|-----------|-----------------------|---------|
-| `-deploy` | Deploy JSON file path |         |
-| `-force`  | Force update          | false   |
-| `-peer`   | Account alias         | default |
+| Option    | Description                                                                         | Default |
+|-----------|-------------------------------------------------------------------------------------|---------|
+| `-deploy` | Deploy JSON file path                                                               |         |
+| `-force`  | Force update                                                                        | false   |
+| `-hide`   | {"key":"github.com.watermint.switchbox.recipe.deploy.update.flag.hide","params":{}} | false   |
+| `-peer`   | Account alias                                                                       | default |
 
 ## Common options:
 

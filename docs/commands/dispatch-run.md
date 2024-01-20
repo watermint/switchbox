@@ -84,12 +84,13 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option          | Description               | Default |
-|-----------------|---------------------------|---------|
-| `-deploy`       | Path to deploy JSON file  |         |
-| `-force-update` | Force update              | false   |
-| `-peer`         | Account alias             | default |
-| `-runbook`      | Path to runbook JSON file |         |
+| Option          | Description                                                                        | Default |
+|-----------------|------------------------------------------------------------------------------------|---------|
+| `-deploy`       | Path to deploy JSON file                                                           |         |
+| `-force-update` | Force update                                                                       | false   |
+| `-hide`         | {"key":"github.com.watermint.switchbox.recipe.dispatch.run.flag.hide","params":{}} | false   |
+| `-peer`         | Account alias                                                                      | default |
+| `-runbook`      | Path to runbook JSON file                                                          |         |
 
 ## Common options:
 

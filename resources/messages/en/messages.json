@@ -10,6 +10,8 @@
   "infra.doc.dc_web.home_doc.tagline": "watermint switchbox",
   "infra.doc.dc_web.home_tagline.header": "watermint switchbox",
   "recipe.deploy.title": "Deploy commands",
+  "github.com.watermint.switchbox.recipe.deploy.update.flag.hide": "Hide console window (Windows only)",
+  "github.com.watermint.switchbox.recipe.dispatch.run.flag.hide": "Hide console window (Windows only)",
   "recipe.deploy.update.cli.args": "-deploy /LOCAL/PATH/TO/DEPLOY.json",
   "recipe.deploy.update.title": "Update binary from Dropbox shared link",
   "recipe.dispatch.run.cli.args": "-deploy /LOCAL/PATH/TO/DEPLOY.json -runbook /LOCAL/PATH/TO/RUN.json",
