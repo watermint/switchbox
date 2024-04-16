@@ -28,9 +28,10 @@ import (
 
 var (
 	ImportToolboxRecipesPrefixes = []string{
+		"config",
 		"dev",
-		"version",
 		"license",
+		"version",
 	}
 )
 
@@ -77,12 +78,12 @@ func run(args []string, testMode bool) {
 
 	// settings
 	app_definitions.PackagesBaseKey = []string{
-		app_definitions.Pkg,
+		app_definitions.CorePkg,
 		sb_definitions.PkgBase,
 	}
 	app_definitions.PackagesBaseRecipe = []string{
-		app_definitions.Pkg + "/recipe",
-		app_definitions.Pkg + "/citron",
+		app_definitions.CorePkg + "/recipe",
+		app_definitions.CorePkg + "/citron",
 		sb_definitions.PkgBase + "/recipe",
 	}
 	dc_supplemental.SkipDropboxBusinessCommandDoc = true
@@ -101,11 +102,12 @@ func run(args []string, testMode bool) {
 	app_definitions.BuildInfo = build
 	app_definitions.BuildId = resolvedVersion.String()
 	app_definitions.Release = toolboxresources.Release()
+	app_definitions.ApplicationRepositoryName = "switchbox"
+	app_definitions.ApplicationRepositoryOwner = "watermint"
 	app_definitions.Copyright = fmt.Sprintf("© 2024-%4d Takayuki Okazaki", build.Year)
 	app_definitions.LandingPage = "https://github.com/watermint/switchbox"
 	app_definitions.LifecycleExpirationWarning = sb_definitions.LifecycleExpirationWarning
 	app_definitions.LifecycleExpirationCritical = sb_definitions.LifecycleExpirationCritical
-	app_definitions.LifecycleExpirationMode = sb_definitions.LifecycleExpirationMode
 	app_definitions.LifecycleUpgradeUrl = sb_definitions.LifecycleUpgradeUrl
 	app_definitions.RecipePackageNames = []string{
 		"recipe",
