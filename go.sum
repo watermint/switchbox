@@ -46,6 +46,8 @@ github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym
 github.com/Microsoft/go-winio v0.5.2/go.mod h1:WpS1mjBmmwHBEWmogvA2mj8546UReBk4v8QkMxJ6pZY=
 github.com/Microsoft/go-winio v0.6.1 h1:9/kr64B9VUZrLm5YYwbGtUJnMgqWVOdUAXu6Migciow=
 github.com/Microsoft/go-winio v0.6.1/go.mod h1:LRdKpFKfdobln8UmuiYcKPot9D2v6svN5+sAH+4kjUM=
+github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERoyfY=
+github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA8Ipt1oGCvU=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/ProtonMail/go-crypto v0.0.0-20230923063757-afb1ddc0824c h1:kMFnB0vCcX7IL/m9Y5LO+KQYv+t1CQOiFe6+SV2J7bE=
 github.com/ProtonMail/go-crypto v0.0.0-20230923063757-afb1ddc0824c/go.mod h1:EjAoLdwvbIOoOQr3ihjnSoLZRtE8azugULFRteWMNc0=
@@ -87,6 +89,11 @@ github.com/bytedance/sonic v1.10.2 h1:GQebETVBxYB7JGWJtLBi07OVzWwt+8dWA00gEVW2ZF
 github.com/bytedance/sonic v1.10.2/go.mod h1:iZcSUejdk5aukTND/Eu/ivjQuEL0Cu9/rf50Hi0u/g4=
 github.com/bytedance/sonic v1.11.4 h1:8+OMLSSDDm2/qJc6ld5K5Sm62NK9VHcUKk0NzBoMAM4=
 github.com/bytedance/sonic v1.11.4/go.mod h1:YrWEqYtlBPS6LUA0vpuG79a1trsh4Ae41uWUWUreHhE=
+github.com/bytedance/sonic v1.11.5 h1:G00FYjjqll5iQ1PYXynbg/hyzqBqavH8Mo9/oTopd9k=
+github.com/bytedance/sonic v1.11.5/go.mod h1:X2PC2giUdj/Cv2lliWFLk6c/DUQok5rViJSemeB0wDw=
+github.com/bytedance/sonic/loader v0.1.0/go.mod h1:UmRT+IRTGKz/DAkzcEGzyVqQFJ7H9BqwBO3pm9H/+HY=
+github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
+github.com/bytedance/sonic/loader v0.1.1/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash v1.1.0 h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
@@ -117,9 +124,13 @@ github.com/cloudflare/circl v1.3.7 h1:qlCDlTPz2n9fu58M0Nh1J/JzcFpfgkFHHX3O35r5vc
 github.com/cloudflare/circl v1.3.7/go.mod h1:sRTcRWXGLrKw6yIGJ+l7amYJFfAXbZG0kBSc8r4zxgA=
 github.com/cloudwego/base64x v0.1.0 h1:Tg5q9tq1khq9Y9UwfoC6zkHK0FypN2GLDvhqFceOL8U=
 github.com/cloudwego/base64x v0.1.0/go.mod h1:lM8nFiNbg74QgesNo6EAtv8N9tlRjBWExmHoNDa3PkU=
+github.com/cloudwego/base64x v0.1.3 h1:b5J/l8xolB7dyDTTmhJP2oTs5LdrjyrUFuNxdfq5hAg=
+github.com/cloudwego/base64x v0.1.3/go.mod h1:1+1K5BUHIQzyapgpF7LwvOGAEDicKtt1umPV+aN8pi8=
 github.com/cloudwego/iasm v0.0.9/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
 github.com/cloudwego/iasm v0.1.1 h1:Py/XoYVR3xFd2pXmvmOnoS5vHTlYT9SnGK28ES8JOIk=
 github.com/cloudwego/iasm v0.1.1/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
+github.com/cloudwego/iasm v0.2.0 h1:1KNIy1I1H9hNNFEEH3DVnI4UujN+1zjpuk6gwHLTssg=
+github.com/cloudwego/iasm v0.2.0/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
@@ -301,6 +312,10 @@ github.com/google/pprof v0.0.0-20240117000934-35fc243c5815/go.mod h1:czg5+yv1E0Z
 github.com/google/pprof v0.0.0-20240227163752-401108e1b7e7/go.mod h1:czg5+yv1E0ZGTi6S6vVK1mke0fV+FaUhNGcd6VRS9Ik=
 github.com/google/pprof v0.0.0-20240415144954-be81aee2d733 h1:nHRIUuWr4qaFmeHwGBzW5QtiLr3Zy5EXjnRpFG9RarE=
 github.com/google/pprof v0.0.0-20240415144954-be81aee2d733/go.mod h1:kf6iHlnVGwgKolg33glAes7Yg/8iWP8ukqeldJSO7jw=
+github.com/google/pprof v0.0.0-20240416155748-26353dc0451f h1:WpZiq8iqvGjJ3m3wzAVKL6+0vz7VkE79iSy9GII00II=
+github.com/google/pprof v0.0.0-20240416155748-26353dc0451f/go.mod h1:kf6iHlnVGwgKolg33glAes7Yg/8iWP8ukqeldJSO7jw=
+github.com/google/pprof v0.0.0-20240422182052-72c8669ad3e7 h1:3q13T5NW3mlTJZM6B5UAsf2N5NYFbYWIyI3W8DlvBDU=
+github.com/google/pprof v0.0.0-20240422182052-72c8669ad3e7/go.mod h1:kf6iHlnVGwgKolg33glAes7Yg/8iWP8ukqeldJSO7jw=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
@@ -342,6 +357,8 @@ github.com/ikawaha/kagome/v2 v2.9.4 h1:8TgrcS47+nVCIOyQJRE33+VAqQrdKIGuZ8QI9sHz9
 github.com/ikawaha/kagome/v2 v2.9.4/go.mod h1:OYzxPG9dQSalvznlcLNR8TEKpPwzKhnZszw9LLbf7e8=
 github.com/ikawaha/kagome/v2 v2.9.6 h1:4Zix6wrLeXfYVJqdhU4Vjsniw7Ata2ZJXm86Lz6LQf0=
 github.com/ikawaha/kagome/v2 v2.9.6/go.mod h1:OYzxPG9dQSalvznlcLNR8TEKpPwzKhnZszw9LLbf7e8=
+github.com/ikawaha/kagome/v2 v2.9.7 h1:priYU2d0Aa57SQOrigEhTdlbGO0FF8hpgCKvmOm3FlU=
+github.com/ikawaha/kagome/v2 v2.9.7/go.mod h1:OYzxPG9dQSalvznlcLNR8TEKpPwzKhnZszw9LLbf7e8=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
@@ -591,6 +608,8 @@ github.com/watermint/toolbox v0.0.0-20240119103943-6171b556b039 h1:uSViipRKkzaMw
 github.com/watermint/toolbox v0.0.0-20240119103943-6171b556b039/go.mod h1:uBIddeUTayLBvknBwZTx+SLbrF/FDLhHj8O1/7gLt4Y=
 github.com/watermint/toolbox v0.0.0-20240415144049-a1c765a0f9c5 h1:aMJ3uFEQ4bo+XNDx3Y13vAKNXP09S4oeGc9sfnJG0Ik=
 github.com/watermint/toolbox v0.0.0-20240415144049-a1c765a0f9c5/go.mod h1:+kuSgjn2t8DByEAAphyDYeajncrUoYgEKQAQbM0T7eg=
+github.com/watermint/toolbox v0.0.0-20240422150311-7323475762af h1:CcObh2Y0/Nn1NELMc6bGAqhpiVAbKh+Ob9vMq/rXBgw=
+github.com/watermint/toolbox v0.0.0-20240422150311-7323475762af/go.mod h1:FB05x7UVTWryXqoSwo+jZ5hARvcmIkBM20yZRoBAsDk=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
@@ -668,6 +687,8 @@ golang.org/x/exp v0.0.0-20240119083558-1b970713d09a h1:Q8/wZp0KX97QFTc2ywcOE0YRj
 golang.org/x/exp v0.0.0-20240119083558-1b970713d09a/go.mod h1:idGWGoKP1toJGkd5/ig9ZLuPcZBC3ewk7SzmH0uou08=
 golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 h1:ESSUROHIBHg7USnszlcdmjBEwdMj9VUvU+OPk4yl2mc=
 golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8/go.mod h1:/lliqkxwWAhPjf5oSOIJup2XcqJaw8RGS6k3TGEc7GI=
+golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f h1:99ci1mjWVBWwJiEKYY6jWa4d2nTQVIEhZIptnrVb1XY=
+golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f/go.mod h1:/lliqkxwWAhPjf5oSOIJup2XcqJaw8RGS6k3TGEc7GI=
 golang.org/x/image v0.0.0-20190227222117-0694c2d4d067/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
 golang.org/x/image v0.0.0-20190802002840-cff245a6509b/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/image v0.15.0 h1:kOELfmgrmJlw4Cdb7g/QGuB3CvDrXbqEIww/pNtNBm8=

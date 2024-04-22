@@ -2,12 +2,12 @@ module github.com/watermint/switchbox
 
 go 1.21
 
-require github.com/watermint/toolbox v0.0.0-20240415144049-a1c765a0f9c5
+require github.com/watermint/toolbox v0.0.0-20240422150311-7323475762af
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
 	git.mills.io/prologic/bitcask v1.0.2 // indirect
-	github.com/Microsoft/go-winio v0.6.1 // indirect
+	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/ProtonMail/go-crypto v1.0.0 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/abcum/lcp v0.0.0-20201209214815-7a3f3840be81 // indirect
@@ -16,13 +16,14 @@ require (
 	github.com/asticode/go-astisub v0.26.2 // indirect
 	github.com/asticode/go-astits v1.13.0 // indirect
 	github.com/boombuler/barcode v1.0.1 // indirect
-	github.com/bytedance/sonic v1.11.4 // indirect
+	github.com/bytedance/sonic v1.11.5 // indirect
+	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
 	github.com/cloudflare/circl v1.3.7 // indirect
-	github.com/cloudwego/base64x v0.1.0 // indirect
-	github.com/cloudwego/iasm v0.1.1 // indirect
+	github.com/cloudwego/base64x v0.1.3 // indirect
+	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/dgraph-io/badger/v4 v4.2.0 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
@@ -52,9 +53,9 @@ require (
 	github.com/google/flatbuffers v24.3.25+incompatible // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20240415144954-be81aee2d733 // indirect
+	github.com/google/pprof v0.0.0-20240422182052-72c8669ad3e7 // indirect
 	github.com/ikawaha/kagome-dict v1.0.9 // indirect
-	github.com/ikawaha/kagome/v2 v2.9.6 // indirect
+	github.com/ikawaha/kagome/v2 v2.9.7 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/jezek/xgb v1.1.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
@@ -109,7 +110,7 @@ require (
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/arch v0.7.0 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
-	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 // indirect
+	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.24.0 // indirect
