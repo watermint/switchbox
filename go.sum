@@ -88,6 +88,7 @@ github.com/bytedance/sonic v1.11.6/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
 github.com/bytedance/sonic/loader v0.1.1/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
+github.com/cespare/xxhash v1.1.0 h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
@@ -560,6 +561,8 @@ github.com/watermint/prose/v3 v3.0.1 h1:9Ti6fn/c9VqbpEMPF4wWUPb5V8HyvM4yTYLT40U3
 github.com/watermint/prose/v3 v3.0.1/go.mod h1:yKjjjgIjCekk34SpEciokCejIKEf5qbshj96OFBp3qw=
 github.com/watermint/toolbox v0.0.0-20240507111920-72b4c6ef1c03 h1:LGapKh3rGbcWf7JQDI2Ts7pOY/2kQYvzAYFhcf/UnAA=
 github.com/watermint/toolbox v0.0.0-20240507111920-72b4c6ef1c03/go.mod h1:aoUVDY5Hjk+FLO6ETU+59AN/F+F+wPhAovpqqb3OvTw=
+github.com/watermint/toolbox v0.0.0-20240513111846-df7c74b10d1c h1:BZm2OWRvuaB4DP0PCTLKHR1nPfIijKlncyECtbraXzU=
+github.com/watermint/toolbox v0.0.0-20240513111846-df7c74b10d1c/go.mod h1:I3SIfSWqBvUQqedv/+2PrhHybeA6ip4quKQVYjL0EZA=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=

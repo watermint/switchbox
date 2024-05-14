@@ -2,7 +2,7 @@ module github.com/watermint/switchbox
 
 go 1.21
 
-require github.com/watermint/toolbox v0.0.0-20240507111920-72b4c6ef1c03
+require github.com/watermint/toolbox v0.0.0-20240513111846-df7c74b10d1c
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
