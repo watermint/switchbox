@@ -12,7 +12,7 @@ require (
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/abcum/lcp v0.0.0-20201209214815-7a3f3840be81 // indirect
 	github.com/acarl005/stripansi v0.0.0-20180116102854-5a71ef0e047d // indirect
-	github.com/asticode/go-astikit v0.42.0 // indirect
+	github.com/asticode/go-astikit v0.43.0 // indirect
 	github.com/asticode/go-astisub v0.26.2 // indirect
 	github.com/asticode/go-astits v1.13.0 // indirect
 	github.com/boombuler/barcode v1.0.1 // indirect
@@ -51,9 +51,9 @@ require (
 	github.com/google/flatbuffers v24.3.25+incompatible // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/pprof v0.0.0-20240430035430-e4905b036c4e // indirect
+	github.com/google/pprof v0.0.0-20240509144519-723abb6459b7 // indirect
 	github.com/ikawaha/kagome-dict v1.0.10 // indirect
-	github.com/ikawaha/kagome/v2 v2.9.7 // indirect
+	github.com/ikawaha/kagome/v2 v2.9.8 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/jezek/xgb v1.1.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
@@ -64,7 +64,7 @@ require (
 	github.com/klauspost/compress v1.17.8 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
-	github.com/lufia/plan9stats v0.0.0-20240408141607-282e7b5d6b74 // indirect
+	github.com/lufia/plan9stats v0.0.0-20240513124658-fba389f38bae // indirect
 	github.com/lxn/win v0.0.0-20210218163916-a377121e959e // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
