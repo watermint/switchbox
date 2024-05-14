@@ -1,12 +1,51 @@
 ---
 layout: command
-title: Command `dev lifecycle planchangepath`
+title: Command `dev release checkin`
 lang: en
 ---
 
-# dev lifecycle planchangepath
+# dev release checkin
 
-Add plan of changing path to commands 
+Check in the new release 
+
+# Security
+
+`watermint toolbox` stores credentials into the file system. That is located at below path:
+
+| OS      | Path                                                               |
+|---------|--------------------------------------------------------------------|
+| Windows | `%HOMEPATH%\.toolbox\secrets` (e.g. C:\Users\bob\.toolbox\secrets) |
+| macOS   | `$HOME/.toolbox/secrets` (e.g. /Users/bob/.toolbox/secrets)        |
+| Linux   | `$HOME/.toolbox/secrets` (e.g. /home/bob/.toolbox/secrets)         |
+
+Please do not share those files to anyone including Dropbox support.
+You can delete those files after use if you want to remove it. If you want to make sure removal of credentials, revoke application access from setting or the admin console.
+
+Please see below help article for more detail:
+* GitHub: https://developer.github.com/apps/managing-oauth-apps/deleting-an-oauth-app/
+
+## Auth scopes
+
+| Description                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub: Grants full access to repositories, including private repositories. That includes read/write access to code, commit statuses, repository and organization projects, invitations, collaborators, adding team memberships, deployment statuses, and repository webhooks for repositories and organizations. Also grants ability to manage user projects. |
+
+# Authorization
+
+For the first run, `tbx` will ask you an authentication with your GitHub account.
+Press the Enter key to launch the browser. The service then performs the authorization and tbx receives the results. You can close the browser window when you see the authentication success message.
+```
+
+watermint switchbox xx.x.xxx
+============================
+
+© 2024-2024 Takayuki Okazaki
+Licensed under open source licenses. Use the `license` command for more detail.
+
+Opening the authorization URL:
+https://github.com/login/oauth/authorize?client_id=xxxxxxxxxxxxxxxxxxxx&redirect_uri=http%3A%2F%2Flocalhost%3A7800%2Fconnect%2Fauth&response_type=code&scope=repo&state=xxxxxxxx
+
+```
 
 # Installation
 
@@ -22,12 +61,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+.\sbx.exe dev release checkin 
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+$HOME/Desktop/sbx dev release checkin 
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -38,17 +77,15 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option                | Description                | Default                                |
-|-----------------------|----------------------------|----------------------------------------|
-| `-announce-url`       | Announce URL               |                                        |
-| `-compact`            | Generate compact output    | false                                  |
-| `-compatibility-file` | Compatibility file         | catalogue/catalogue_compatibility.json |
-| `-current-base`       | Current recipe's base path | citron                                 |
-| `-current-path`       | Current CLI path           |                                        |
-| `-date`               | Effective date             |                                        |
-| `-former-base`        | Former recipe's base path  | recipe                                 |
-| `-former-path`        | Former CLI path            |                                        |
-| `-message-file`       | Message file path          | resources/messages/en/messages.json    |
+| Option               | Description                       | Default            |
+|----------------------|-----------------------------------|--------------------|
+| `-branch`            | Repository branch                 | main               |
+| `-owner`             | Repository owner                  | watermint          |
+| `-peer`              | Account alias                     | default            |
+| `-repo`              | Repository name                   | switchbox          |
+| `-supplement-branch` | Supplement repository branch name | main               |
+| `-supplement-owner`  | Supplement repository owner       | watermint          |
+| `-supplement-repo`   | Supplement repository name        | toolbox-supplement |
 
 ## Common options:
 

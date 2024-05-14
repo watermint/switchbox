@@ -1,12 +1,12 @@
 ---
 layout: command
-title: Command `dev test setup teamsharedlink`
+title: Command `deploy link`
 lang: en
 ---
 
-# dev test setup teamsharedlink
+# deploy link
 
-Create demo shared links (Irreversible operation)
+Deploy binary from Dropbox shared link and create symbolic link to the binary 
 
 # Security
 
@@ -22,17 +22,16 @@ Please do not share those files to anyone including Dropbox support.
 You can delete those files after use if you want to remove it. If you want to make sure removal of credentials, revoke application access from setting or the admin console.
 
 Please see below help article for more detail:
-* Dropbox for teams: https://help.dropbox.com/installs-integrations/third-party/business-api#manage
+* Dropbox (Individual account): https://help.dropbox.com/installs-integrations/third-party/third-party-apps
 
 ## Auth scopes
 
-| Description                                                                                              |
-|----------------------------------------------------------------------------------------------------------|
-| Dropbox for teams: Edit content of your Dropbox files and folders                                        |
-| Dropbox for teams: View your team group membership                                                       |
-| Dropbox for teams: View and manage your Dropbox sharing settings and collaborators                       |
-| Dropbox for teams: View structure of your team's and members' folders                                    |
-| Dropbox for teams: View basic information about your team including names, user count, and team settings |
+| Description                                                                                          |
+|------------------------------------------------------------------------------------------------------|
+| Dropbox: View basic information about your Dropbox account such as your username, email, and country |
+| Dropbox: View content of your Dropbox files and folders                                              |
+| Dropbox: View information about your Dropbox files and folders                                       |
+| Dropbox: View your Dropbox sharing settings and collaborators                                        |
 
 # Authorization
 
@@ -69,12 +68,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev test setup teamsharedlink -group GROUP_NAME -num-links-per-member NUM -query QUERY
+.\sbx.exe deploy link -deploy /LOCAL/PATH/TO/DEPLOY.json
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev test setup teamsharedlink -group GROUP_NAME -num-links-per-member NUM -query QUERY
+$HOME/Desktop/sbx deploy link -deploy /LOCAL/PATH/TO/DEPLOY.json
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -85,14 +84,12 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option                  | Description                          | Default |
-|-------------------------|--------------------------------------|---------|
-| `-group`                | Group name                           |         |
-| `-num-links-per-member` | Number of links to create per member | 5       |
-| `-peer`                 | Account alias                        | default |
-| `-query`                | Query                                |         |
-| `-seed`                 | Shared link seed value               | 0       |
-| `-visibility`           | Visibility                           | random  |
+| Option    | Description                        | Default |
+|-----------|------------------------------------|---------|
+| `-deploy` | Deploy JSON file path              |         |
+| `-force`  | Force update                       | false   |
+| `-hide`   | Hide console window (Windows only) | false   |
+| `-peer`   | Account alias                      | default |
 
 ## Common options:
 
@@ -116,35 +113,6 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 | `-skip-logging`    | Skip logging in the local storage                                                         | false                |
 | `-verbose`         | Show current operations for more detail.                                                  | false                |
 | `-workspace`       | Workspace path                                                                            |                      |
-
-# Results
-
-Report file path will be displayed last line of the command line output. If you missed command line output, please see path below. [job-id] will be the date/time of the run. Please see the latest job-id.
-
-| OS      | Path pattern                                | Example                                                |
-|---------|---------------------------------------------|--------------------------------------------------------|
-| Windows | `%HOMEPATH%\.toolbox\jobs\[job-id]\reports` | C:\Users\bob\.toolbox\jobs\20190909-115959.597\reports |
-| macOS   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /Users/bob/.toolbox/jobs/20190909-115959.597/reports   |
-| Linux   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /home/bob/.toolbox/jobs/20190909-115959.597/reports    |
-
-## Report: created
-
-THis report shows a list of shared links.
-The command will generate a report in three different formats. `created.csv`, `created.json`, and `created.xlsx`.
-
-| Column     | Description                                                                                                                                                                                                             |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id         | A unique identifier for the linked file or folder                                                                                                                                                                       |
-| tag        | Entry type (file, or folder)                                                                                                                                                                                            |
-| url        | URL of the shared link.                                                                                                                                                                                                 |
-| name       | The linked file name (including extension).                                                                                                                                                                             |
-| expires    | Expiration time, if set.                                                                                                                                                                                                |
-| path_lower | The lowercased full path in the user's Dropbox.                                                                                                                                                                         |
-| visibility | The current visibility of the link after considering the shared links policies of the the team (in case the link's owner is part of a team) and the shared folder (in case the linked file is part of a shared folder). |
-
-If you run with `-budget-memory low` option, the command will generate only JSON format report.
-
-In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `created_0000.xlsx`, `created_0001.xlsx`, `created_0002.xlsx`, ...
 
 # Proxy configuration
 

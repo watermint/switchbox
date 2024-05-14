@@ -1,12 +1,12 @@
 ---
 layout: command
-title: Command `dev lifecycle planchangepath`
+title: Command `config feature disable`
 lang: en
 ---
 
-# dev lifecycle planchangepath
+# config feature disable
 
-Add plan of changing path to commands 
+Disable a feature. 
 
 # Installation
 
@@ -22,12 +22,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+.\sbx.exe config feature disable -key FEATURE
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+$HOME/Desktop/sbx config feature disable -key FEATURE
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -38,17 +38,9 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option                | Description                | Default                                |
-|-----------------------|----------------------------|----------------------------------------|
-| `-announce-url`       | Announce URL               |                                        |
-| `-compact`            | Generate compact output    | false                                  |
-| `-compatibility-file` | Compatibility file         | catalogue/catalogue_compatibility.json |
-| `-current-base`       | Current recipe's base path | citron                                 |
-| `-current-path`       | Current CLI path           |                                        |
-| `-date`               | Effective date             |                                        |
-| `-former-base`        | Former recipe's base path  | recipe                                 |
-| `-former-path`        | Former CLI path            |                                        |
-| `-message-file`       | Message file path          | resources/messages/en/messages.json    |
+| Option | Description  | Default |
+|--------|--------------|---------|
+| `-key` | Feature key. |         |
 
 ## Common options:
 

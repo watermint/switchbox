@@ -1,12 +1,12 @@
 ---
 layout: command
-title: Command `dev release candidate`
+title: Command `dev license issue`
 lang: en
 ---
 
-# dev release candidate
+# dev license issue
 
-Validate release candidate 
+Issue a license 
 
 # Security
 
@@ -26,8 +26,9 @@ Please see below help article for more detail:
 
 ## Auth scopes
 
-| Description |
-|-------------|
+| Description                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub: Grants full access to repositories, including private repositories. That includes read/write access to code, commit statuses, repository and organization projects, invitations, collaborators, adding team memberships, deployment statuses, and repository webhooks for repositories and organizations. Also grants ability to manage user projects. |
 
 # Authorization
 
@@ -60,12 +61,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev release candidate 
+.\sbx.exe dev license issue -licensee-email LICENSEE_EMAIL -licensee-name LICENSEE_NAME
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev release candidate 
+$HOME/Desktop/sbx dev license issue -licensee-email LICENSEE_EMAIL -licensee-name LICENSEE_NAME
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -73,6 +74,23 @@ You may find the message like:
 > "tbx" was blocked from use because it is not from an identified developer.
 
 And you may find the button "Allow Anyway". Please hit the button with your risk. At second run, please hit button "Open" on the dialogue.
+
+## Options:
+
+| Option                       | Description                                                         | Default             |
+|------------------------------|---------------------------------------------------------------------|---------------------|
+| `-app-name`                  | Application name                                                    | watermint switchbox |
+| `-branch`                    | License repository branch                                           | main                |
+| `-expiration`                | License expiration date                                             |                     |
+| `-licensee-email`            | Licensee email                                                      |                     |
+| `-licensee-name`             | Licensee name                                                       |                     |
+| `-lifecycle-available-after` | Lifecycle available after this period from the build time (seconds) | 94608000            |
+| `-lifecycle-warning-after`   | Lifecycle warning after this period from the build time (seconds)   | 31536000            |
+| `-owner`                     | License repository owner                                            | watermint           |
+| `-peer`                      | Account alias                                                       | default             |
+| `-recipes-allowed`           | Comma separated list of recipes allowed                             |                     |
+| `-repository`                | License repository                                                  | toolbox-supplement  |
+| `-scope`                     | License scope                                                       |                     |
 
 ## Common options:
 
@@ -96,53 +114,6 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 | `-skip-logging`    | Skip logging in the local storage                                                         | false                |
 | `-verbose`         | Show current operations for more detail.                                                  | false                |
 | `-workspace`       | Workspace path                                                                            |                      |
-
-# Results
-
-Report file path will be displayed last line of the command line output. If you missed command line output, please see path below. [job-id] will be the date/time of the run. Please see the latest job-id.
-
-| OS      | Path pattern                                | Example                                                |
-|---------|---------------------------------------------|--------------------------------------------------------|
-| Windows | `%HOMEPATH%\.toolbox\jobs\[job-id]\reports` | C:\Users\bob\.toolbox\jobs\20190909-115959.597\reports |
-| macOS   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /Users/bob/.toolbox/jobs/20190909-115959.597/reports   |
-| Linux   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /home/bob/.toolbox/jobs/20190909-115959.597/reports    |
-
-## Report: announcements
-
-Announcement
-The command will generate a report in three different formats. `announcements.csv`, `announcements.json`, and `announcements.xlsx`.
-
-| Column    | Description         |
-|-----------|---------------------|
-| number    | Announcement number |
-| title     | Title               |
-| url       | URL                 |
-| updatedAt | Updated at          |
-
-If you run with `-budget-memory low` option, the command will generate only JSON format report.
-
-In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `announcements_0000.xlsx`, `announcements_0001.xlsx`, `announcements_0002.xlsx`, ...
-
-## Report: result
-
-Recipe test result
-The command will generate a report in three different formats. `result.csv`, `result.json`, and `result.xlsx`.
-
-| Column          | Description                   |
-|-----------------|-------------------------------|
-| path            | Path to the recipe            |
-| name            | Name of the recipe            |
-| skip            | True if the test skipped      |
-| timeout_enabled | True if timeout mode enabled  |
-| use_mock        | True if use mock mode enabled |
-| timeout         | True if the test timeout      |
-| duration        | Test duration in milliseconds |
-| no_error        | True if no error received     |
-| error           | Error                         |
-
-If you run with `-budget-memory low` option, the command will generate only JSON format report.
-
-In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `result_0000.xlsx`, `result_0001.xlsx`, `result_0002.xlsx`, ...
 
 # Proxy configuration
 

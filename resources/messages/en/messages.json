@@ -1,4 +1,8 @@
 {
+  "github.com.watermint.switchbox.recipe.deploy.link.flag.deploy": "Deploy JSON file path",
+  "github.com.watermint.switchbox.recipe.deploy.link.flag.force": "Force update",
+  "github.com.watermint.switchbox.recipe.deploy.link.flag.hide": "Hide console window (Windows only)",
+  "github.com.watermint.switchbox.recipe.deploy.link.flag.peer": "Account alias",
   "github.com.watermint.switchbox.recipe.deploy.update.flag.deploy": "Deploy JSON file path",
   "github.com.watermint.switchbox.recipe.deploy.update.flag.force": "Force update",
   "github.com.watermint.switchbox.recipe.deploy.update.flag.hide": "Hide console window (Windows only)",
@@ -11,6 +15,8 @@
   "infra.doc.dc_readme.license.body_license": "watermint switchbox is licensed under the Apache License, Version 2.0.\nPlease see LICENSE.md or LICENSE.txt for more detail.",
   "infra.doc.dc_web.home_doc.tagline": "watermint switchbox",
   "infra.doc.dc_web.home_tagline.header": "watermint switchbox",
+  "recipe.deploy.link.cli.args": "-deploy /LOCAL/PATH/TO/DEPLOY.json",
+  "recipe.deploy.link.title": "Deploy binary from Dropbox shared link and create symbolic link to the binary",
   "recipe.deploy.title": "Deploy commands",
   "recipe.deploy.update.cli.args": "-deploy /LOCAL/PATH/TO/DEPLOY.json",
   "recipe.deploy.update.title": "Update binary from Dropbox shared link",
