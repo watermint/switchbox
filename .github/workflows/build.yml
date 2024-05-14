@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [ "main" "current" ]
+    branches: [ "main", "current" ]
 
 jobs:
   xgo:
