@@ -4,6 +4,11 @@
       "release": 3,
       "key": "THAOA5H42MZ3EZC2YUZXYS4SUDGDE4JPYIY",
       "hashed_salt": "A7WEJTMO3TTY3CXZPWR5PNSJ7XGLMDT4"
+    },
+    {
+      "release": 4,
+      "key": "DIC75EGN7ITG7J2ABK6GRT6MEKMFAS6JRYH",
+      "hashed_salt": "A7WEJTMO3TTY3CXZPWR5PNSJ7XGLMDT4"
     }
   ]
 }
