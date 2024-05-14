@@ -1,28 +1,33 @@
 package sb_deploy
 
 import (
+	"encoding/json"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_client"
 	"github.com/watermint/toolbox/domain/dropbox/model/mo_file"
 	dbx_path "github.com/watermint/toolbox/domain/dropbox/model/mo_path"
 	"github.com/watermint/toolbox/domain/dropbox/model/mo_url"
 	"github.com/watermint/toolbox/domain/dropbox/service/sv_sharedlink_file"
-	"github.com/watermint/toolbox/essentials/io/es_zip"
 	"github.com/watermint/toolbox/essentials/log/esl"
 	"github.com/watermint/toolbox/essentials/model/mo_path"
 	"github.com/watermint/toolbox/essentials/strings/es_version"
 	"github.com/watermint/toolbox/infra/control/app_control"
-	"github.com/watermint/toolbox/infra/control/app_definitions"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
-// BinSrcDropboxDstLocal Deploy binary from Dropbox to local
+const (
+	BinSrcDropboxDstLocalVersionCacheLifecycle = 86400
+	BinSrcDropboxDstLocalVersionCacheName      = "sb_deploy-bin_src_dbx_dst_local_version_cache.json"
+)
+
+// BinSrcDropboxDstLocalRecipe Deploy binary from Dropbox to local
 // This recipe expect folder structure like this:
 // `PREFIX-VERSION/PREFIX-VERSION-SUFFIX.zip`.
 // For example, if prefix is `myapp` and suffix is `linux-amd64`, the folder structure is:
 // `myapp-1.0.0/myapp-1.0.0-linux-amd64.zip`.
-type BinSrcDropboxDstLocal struct {
+type BinSrcDropboxDstLocalRecipe struct {
 	// SourceUrl is the url to the shared link folder
 	SourceUrl string `json:"source_url"`
 
@@ -46,42 +51,18 @@ type BinSrcDropboxDstLocal struct {
 	DeployPath string `json:"deploy_path,omitempty"`
 }
 
-type BinSrcDropboxDstLocalWorker interface {
-	// UpdateIfRequired Update if required
-	UpdateIfRequired() (err error)
+type BinSrcDropboxDstLocalRemoteVersionCache struct {
+	// CacheTime is the time when the cache is created in Unix time
+	CacheTime int64 `json:"cache_time,omitempty"`
 
-	// UpdateForce Update forcefully
-	UpdateForce() (err error)
+	// Versions is the list of versions
+	Versions []es_version.Version `json:"versions,omitempty"`
 
-	// GetLocalLatest Get local latest version and download automatically if
-	// no local version found. But this will not check remote versions if local
-	// version is found.
-	GetLocalLatest() (binaryPath string, version es_version.Version, err error)
-
-	// ListLocalVersions List local versions
-	ListLocalVersions() (versions []es_version.Version, versionPaths map[string]string, err error)
-
-	// ListRemoteVersions List remote versions
-	ListRemoteVersions() (versions []es_version.Version, versionPaths map[string]string, err error)
-
-	// Download version to temporary path
-	Download(version es_version.Version, versionPath string) (downloadPath string, err error)
-
-	// Extract version into cellar
-	Extract(version es_version.Version, downloadPath string) (cellarPath string, err error)
-
-	// DeploySymlink Deploy latest binary as symlink
-	DeploySymlink() (err error)
-
-	// BinaryName returns the binary name that consider current OS platform
-	BinaryName() string
-
-	// LocalLatestBinaryPath returns the path to the latest binary. Returns empty string
-	// if no local version found.
-	LocalLatestBinaryPath() string
+	// Versions is the list of versions, version string as key and path as value
+	VersionPaths map[string]string `json:"version_paths,omitempty"`
 }
 
-func NewBinSrcDropboxDstLocal(recipe BinSrcDropboxDstLocal, ctl app_control.Control, client dbx_client.Client) BinSrcDropboxDstLocalWorker {
+func NewBinSrcDropboxDstLocal(recipe BinSrcDropboxDstLocalRecipe, ctl app_control.Control, client dbx_client.Client) BinDeploy {
 	return &binSrcDropboxDstLocalWorkerImpl{
 		recipe: recipe,
 		ctl:    ctl,
@@ -90,35 +71,47 @@ func NewBinSrcDropboxDstLocal(recipe BinSrcDropboxDstLocal, ctl app_control.Cont
 }
 
 type binSrcDropboxDstLocalWorkerImpl struct {
-	recipe BinSrcDropboxDstLocal
+	recipe BinSrcDropboxDstLocalRecipe
 	ctl    app_control.Control
 	client dbx_client.Client
 }
 
-func (z binSrcDropboxDstLocalWorkerImpl) LocalLatestBinaryPath() string {
-	l := z.ctl.Log()
-	localVersions, localVersionPaths, err := z.ListLocalVersions()
+func (z binSrcDropboxDstLocalWorkerImpl) IsUpdateRequired() (required bool, err error) {
+	localVersions, _, err := z.ListLocalVersions()
 	if err != nil {
-		l.Debug("Unable to list local versions", esl.Error(err))
-		return ""
+		return false, err
 	}
+	remoteVersions, _, err := z.ListRemoteVersions()
+	if err != nil {
+		return false, err
+	}
+
+	remoteVersionLatest := es_version.Max(remoteVersions...)
 	localVersionLatest := es_version.Max(localVersions...)
-	if len(localVersions) < 1 || localVersionLatest.Equals(es_version.Zero()) {
-		return ""
-	}
-	return filepath.Join(localVersionPaths[localVersionLatest.String()], z.BinaryName())
+
+	return !localVersionLatest.Equals(remoteVersionLatest), nil
+}
+
+func (z binSrcDropboxDstLocalWorkerImpl) LocalLatestBinaryPath() string {
+	return utilLocalLatestBinaryPath(z.ctl, z.recipe.CellarPath, z.recipe.Prefix, z.recipe.BinaryName)
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) BinaryName() string {
-	if app_definitions.IsWindows() {
-		return z.recipe.BinaryName + ".exe"
-	} else {
-		return z.recipe.BinaryName
-	}
+	return utilBinaryName(z.recipe.BinaryName)
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) update(force bool) (err error) {
 	l := z.ctl.Log()
+
+	updateRequired, err := z.IsUpdateRequired()
+	if err != nil {
+		l.Warn("Unable to check update required", esl.Error(err))
+		return err
+	}
+	if !force && !updateRequired {
+		l.Info("No update required")
+		return nil
+	}
 
 	if err := os.MkdirAll(z.recipe.CellarPath, 0755); err != nil {
 		l.Warn("Unable to create cellar directory", esl.Error(err))
@@ -138,14 +131,6 @@ func (z binSrcDropboxDstLocalWorkerImpl) update(force bool) (err error) {
 
 	localVersionLatest := es_version.Max(localVersions...)
 	remoteVersionLatest := es_version.Max(remoteVersions...)
-
-	if !force && localVersionLatest.Equals(remoteVersionLatest) {
-		l.Info("Already latest version", esl.String("localVersion", localVersionLatest.String()),
-			esl.String("localPath", localVersionPaths[localVersionLatest.String()]),
-			esl.String("remoteVersion", remoteVersionLatest.String()),
-			esl.String("remotePath", remoteVersionPaths[remoteVersionLatest.String()]))
-		return nil
-	}
 
 	l.Info("Local latest version", esl.String("version", localVersionLatest.String()), esl.String("path", localVersionPaths[localVersionLatest.String()]))
 	l.Info("Remote latest version", esl.String("version", remoteVersionLatest.String()), esl.String("path", remoteVersionPaths[remoteVersionLatest.String()]))
@@ -190,41 +175,59 @@ func (z binSrcDropboxDstLocalWorkerImpl) GetLocalLatest() (binaryPath string, ve
 	return localVersionPaths[localVersionLatest.String()], localVersionLatest, nil
 }
 
-func (z binSrcDropboxDstLocalWorkerImpl) ListLocalVersions() (versions []es_version.Version, versionPaths map[string]string, err error) {
-	versions = make([]es_version.Version, 0)
-	versionPaths = make(map[string]string)
-	l := z.ctl.Log().With(esl.String("cellarPath", z.recipe.CellarPath))
-	entries, err := os.ReadDir(z.recipe.CellarPath)
+func (z binSrcDropboxDstLocalWorkerImpl) loadRemoteVersionsCache() (versions []es_version.Version, versionPaths map[string]string, found bool) {
+	l := z.ctl.Log()
+	cachePath := filepath.Join(z.ctl.Workspace().Cache(), BinSrcDropboxDstLocalVersionCacheName)
+	cacheData, err := os.ReadFile(cachePath)
 	if err != nil {
-		if os.IsNotExist(err) {
-			l.Debug("Cellar directory not found")
-			return versions, versionPaths, nil
-		}
-		l.Debug("Unable to read cellar directory", esl.Error(err))
-		return versions, versionPaths, err
+		l.Debug("Unable to read cache", esl.Error(err))
+		return versions, versionPaths, false
 	}
-	fullPrefix := z.recipe.Prefix + "-"
-
-	for _, entry := range entries {
-		if entry.IsDir() && strings.HasPrefix(entry.Name(), fullPrefix) {
-			verStr := strings.TrimPrefix(entry.Name(), fullPrefix)
-			ver, err := es_version.Parse(verStr)
-			if err != nil {
-				l.Debug("Unable to parse version", esl.Error(err))
-				continue
-			}
-			versions = append(versions, ver)
-			versionPaths[ver.String()] = filepath.Join(z.recipe.CellarPath, entry.Name())
-		}
+	l.Debug("Cache found")
+	cache := &BinSrcDropboxDstLocalRemoteVersionCache{}
+	if err = json.Unmarshal(cacheData, cache); err != nil {
+		l.Debug("Unable to unmarshal cache", esl.Error(err))
+		return versions, versionPaths, false
 	}
+	if cache.CacheTime+BinSrcDropboxDstLocalVersionCacheLifecycle < time.Now().Unix() {
+		return versions, versionPaths, false
+	}
+	return cache.Versions, cache.VersionPaths, true
+}
 
-	return versions, versionPaths, nil
+func (z binSrcDropboxDstLocalWorkerImpl) saveRemoteVersionCache(versions []es_version.Version, versionPaths map[string]string) (err error) {
+	l := z.ctl.Log()
+	cachePath := filepath.Join(z.ctl.Workspace().Cache(), BinSrcDropboxDstLocalVersionCacheName)
+	cache := &BinSrcDropboxDstLocalRemoteVersionCache{
+		CacheTime:    time.Now().Unix(),
+		Versions:     versions,
+		VersionPaths: versionPaths,
+	}
+	cacheData, err := json.Marshal(cache)
+	if err != nil {
+		l.Debug("Unable to marshal cache", esl.Error(err))
+		return err
+	}
+	if err := os.WriteFile(cachePath, cacheData, 0644); err != nil {
+		l.Debug("Unable to write cache", esl.Error(err))
+		return err
+	}
+	return nil
+}
+
+func (z binSrcDropboxDstLocalWorkerImpl) ListLocalVersions() (versions []es_version.Version, versionPaths map[string]string, err error) {
+	return utilLocalListLocalVersions(z.ctl, z.recipe.CellarPath, z.recipe.Prefix)
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) ListRemoteVersions() (versions []es_version.Version, versionPaths map[string]string, err error) {
 	l := z.ctl.Log().With(esl.String("sourceUrl", z.recipe.SourceUrl))
 	versions = make([]es_version.Version, 0)
 	versionPaths = make(map[string]string)
+
+	if versions, versionPaths, found := z.loadRemoteVersionsCache(); found {
+		l.Debug("Remote version cache found")
+		return versions, versionPaths, nil
+	}
 
 	url, err := mo_url.NewUrl(z.recipe.SourceUrl)
 	if err != nil {
@@ -264,6 +267,10 @@ func (z binSrcDropboxDstLocalWorkerImpl) ListRemoteVersions() (versions []es_ver
 		return versions, versionPaths, err
 	}
 
+	if err := z.saveRemoteVersionCache(versions, versionPaths); err != nil {
+		l.Debug("Unable to save remote version cache", esl.Error(err))
+	}
+
 	return versions, versionPaths, nil
 }
 
@@ -292,30 +299,7 @@ func (z binSrcDropboxDstLocalWorkerImpl) Download(version es_version.Version, ve
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) Extract(version es_version.Version, downloadPath string) (cellarPath string, err error) {
-	l := z.ctl.Log().With(esl.String("downloadPath", downloadPath))
-	l.Debug("Extract version")
-
-	cellarPath = filepath.Join(z.recipe.CellarPath, z.recipe.Prefix+"-"+version.String())
-	if err := os.MkdirAll(cellarPath, 0755); err != nil {
-		l.Debug("Unable to create destination directory", esl.Error(err))
-		return "", err
-	}
-	l.Info("Extracting into cellar directory", esl.String("cellarPath", cellarPath))
-	err = es_zip.Extract(l, downloadPath, cellarPath)
-	l.Debug("Extracted", esl.Error(err), esl.String("cellarPath", cellarPath))
-
-	binCellarPath := filepath.Join(cellarPath, z.BinaryName())
-
-	if err := os.Chmod(binCellarPath, 0755); err != nil {
-		l.Warn("Unable to change permission", esl.Error(err))
-		return cellarPath, err
-	}
-
-	if err := os.Remove(downloadPath); err != nil {
-		l.Warn("Unable to remove downloaded file", esl.Error(err))
-	}
-
-	return cellarPath, err
+	return utilLocalExtract(z.ctl, z.recipe.CellarPath, z.recipe.Prefix, z.recipe.BinaryName, version, downloadPath)
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) DeploySymlink() (err error) {

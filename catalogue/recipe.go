@@ -10,6 +10,7 @@ import (
 
 func AutoDetectedRecipes() []infra_recipe_rc_recipe.Recipe {
 	return []infra_recipe_rc_recipe.Recipe{
+		&recipedeploy.Link{},
 		&recipedeploy.Update{},
 		&recipedispatch.Run{},
 	}

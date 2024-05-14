@@ -1,12 +1,12 @@
 ---
 layout: command
-title: Command `dev release candidate`
+title: Command `dev release announcement`
 lang: en
 ---
 
-# dev release candidate
+# dev release announcement
 
-Validate release candidate 
+Update announcements 
 
 # Security
 
@@ -26,8 +26,9 @@ Please see below help article for more detail:
 
 ## Auth scopes
 
-| Description |
-|-------------|
+| Description                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub: Grants full access to repositories, including private repositories. That includes read/write access to code, commit statuses, repository and organization projects, invitations, collaborators, adding team memberships, deployment statuses, and repository webhooks for repositories and organizations. Also grants ability to manage user projects. |
 
 # Authorization
 
@@ -60,12 +61,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev release candidate 
+.\sbx.exe dev release announcement 
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev release candidate 
+$HOME/Desktop/sbx dev release announcement 
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -73,6 +74,15 @@ You may find the message like:
 > "tbx" was blocked from use because it is not from an identified developer.
 
 And you may find the button "Allow Anyway". Please hit the button with your risk. At second run, please hit button "Open" on the dialogue.
+
+## Options:
+
+| Option         | Description              | Default              |
+|----------------|--------------------------|----------------------|
+| `-category-id` | Announcement category ID | DIC_kwDOBFqRm84CQesd |
+| `-owner`       | Repository owner         | watermint            |
+| `-peer`        | Account alias            | default              |
+| `-repository`  | Repository name          | toolbox              |
 
 ## Common options:
 
@@ -122,27 +132,6 @@ The command will generate a report in three different formats. `announcements.cs
 If you run with `-budget-memory low` option, the command will generate only JSON format report.
 
 In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `announcements_0000.xlsx`, `announcements_0001.xlsx`, `announcements_0002.xlsx`, ...
-
-## Report: result
-
-Recipe test result
-The command will generate a report in three different formats. `result.csv`, `result.json`, and `result.xlsx`.
-
-| Column          | Description                   |
-|-----------------|-------------------------------|
-| path            | Path to the recipe            |
-| name            | Name of the recipe            |
-| skip            | True if the test skipped      |
-| timeout_enabled | True if timeout mode enabled  |
-| use_mock        | True if use mock mode enabled |
-| timeout         | True if the test timeout      |
-| duration        | Test duration in milliseconds |
-| no_error        | True if no error received     |
-| error           | Error                         |
-
-If you run with `-budget-memory low` option, the command will generate only JSON format report.
-
-In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `result_0000.xlsx`, `result_0001.xlsx`, `result_0002.xlsx`, ...
 
 # Proxy configuration
 

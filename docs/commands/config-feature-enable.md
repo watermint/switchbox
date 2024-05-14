@@ -1,57 +1,12 @@
 ---
 layout: command
-title: Command `dev test setup massfiles`
+title: Command `config feature enable`
 lang: en
 ---
 
-# dev test setup massfiles
+# config feature enable
 
-Upload Wikimedia dump file as test file 
-
-# Security
-
-`watermint toolbox` stores credentials into the file system. That is located at below path:
-
-| OS      | Path                                                               |
-|---------|--------------------------------------------------------------------|
-| Windows | `%HOMEPATH%\.toolbox\secrets` (e.g. C:\Users\bob\.toolbox\secrets) |
-| macOS   | `$HOME/.toolbox/secrets` (e.g. /Users/bob/.toolbox/secrets)        |
-| Linux   | `$HOME/.toolbox/secrets` (e.g. /home/bob/.toolbox/secrets)         |
-
-Please do not share those files to anyone including Dropbox support.
-You can delete those files after use if you want to remove it. If you want to make sure removal of credentials, revoke application access from setting or the admin console.
-
-Please see below help article for more detail:
-* Dropbox (Individual account): https://help.dropbox.com/installs-integrations/third-party/third-party-apps
-
-## Auth scopes
-
-| Description                                                                                          |
-|------------------------------------------------------------------------------------------------------|
-| Dropbox: View basic information about your Dropbox account such as your username, email, and country |
-| Dropbox: View content of your Dropbox files and folders                                              |
-| Dropbox: Edit content of your Dropbox files and folders                                              |
-
-# Authorization
-
-For the first run, `tbx` will ask you an authentication with your Dropbox account.
-Please copy the link and paste it into your browser. Then proceed to authorization. After authorization, Dropbox will show you an authorization code. Please copy that code and paste it to the `tbx`.
-```
-
-watermint switchbox xx.x.xxx
-============================
-
-© 2024-2024 Takayuki Okazaki
-Licensed under open source licenses. Use the `license` command for more detail.
-
-1. Visit the URL for the auth dialogue:
-
-https://www.dropbox.com/oauth2/authorize?client_id=xxxxxxxxxxxxxxx&response_type=code&state=xxxxxxxx
-
-2. Click 'Allow' (you might have to login first):
-3. Copy the authorisation code:
-Enter the authorisation code
-```
+Enable a feature. 
 
 # Installation
 
@@ -67,12 +22,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev test setup massfiles -base /UPLOAD/PATH -source /LOCAL/PATH/TO/wikimedia/dumpfile/dump.xml.bz2
+.\sbx.exe config feature enable -key FEATURE
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev test setup massfiles -base /UPLOAD/PATH -source /LOCAL/PATH/TO/wikimedia/dumpfile/dump.xml.bz2
+$HOME/Desktop/sbx config feature enable -key FEATURE
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -83,15 +38,9 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 
 ## Options:
 
-| Option                | Description                                                                                        | Default |
-|-----------------------|----------------------------------------------------------------------------------------------------|---------|
-| `-base`               | Dropbox base path                                                                                  |         |
-| `-batch-size`         | Batch size                                                                                         | 1000    |
-| `-commit-concurrency` | Number of concurrency to commit                                                                    | 3       |
-| `-offset`             | Upload offset (skip # pages)                                                                       | 0       |
-| `-peer`               | Account alias                                                                                      | default |
-| `-shard-size`         | Number of shards (number of folder/namespaces to distribute). Need to setup namespaces separately. | 20      |
-| `-source`             | Source file                                                                                        |         |
+| Option | Description  | Default |
+|--------|--------------|---------|
+| `-key` | Feature key. |         |
 
 ## Common options:
 

@@ -29,7 +29,7 @@ func (z *Run) Preset() {
 		dbx_auth.ScopeSharingRead,
 	)
 	z.Runbook.SetModel(&sb_dispatch.BinRunbook{})
-	z.Deploy.SetModel(&sb_deploy.BinSrcDropboxDstLocal{})
+	z.Deploy.SetModel(&sb_deploy.BinSrcDropboxDstLocalRecipe{})
 }
 
 func (z *Run) Exec(c app_control.Control) error {
@@ -45,11 +45,11 @@ func (z *Run) Exec(c app_control.Control) error {
 	} else {
 		runbook = v.(*sb_dispatch.BinRunbook)
 	}
-	var deploy *sb_deploy.BinSrcDropboxDstLocal
+	var deploy *sb_deploy.BinSrcDropboxDstLocalRecipe
 	if v, err := z.Deploy.Unmarshal(); err != nil {
 		return err
 	} else {
-		deploy = v.(*sb_deploy.BinSrcDropboxDstLocal)
+		deploy = v.(*sb_deploy.BinSrcDropboxDstLocalRecipe)
 	}
 
 	deployWorker := sb_deploy.NewBinSrcDropboxDstLocal(*deploy, c, z.Peer.Client())

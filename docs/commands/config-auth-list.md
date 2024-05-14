@@ -1,12 +1,12 @@
 ---
 layout: command
-title: Command `dev lifecycle planchangepath`
+title: Command `config auth list`
 lang: en
 ---
 
-# dev lifecycle planchangepath
+# config auth list
 
-Add plan of changing path to commands 
+List all auth credentials 
 
 # Installation
 
@@ -22,12 +22,12 @@ This document uses the Desktop folder for command example.
 Windows:
 ```
 cd $HOME\Desktop
-.\sbx.exe dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+.\sbx.exe config auth list 
 ```
 
 macOS, Linux:
 ```
-$HOME/Desktop/sbx dev lifecycle planchangepath -announce-url URL -compatibility-file /LOCAL/PATH/TO/compat.json -message-file /LOCAL/PATH/TO/messages.json -date "2020-04-01 17:58:38" -current-path RECIPE -former-path RECIPE
+$HOME/Desktop/sbx config auth list 
 ```
 
 Note for macOS Catalina 10.15 or above: macOS verifies Developer identity. Currently, `tbx` is not ready for it. Please select "Cancel" on the first dialogue. Then please proceed "System Preference", then open "Security & Privacy", select "General" tab.
@@ -35,20 +35,6 @@ You may find the message like:
 > "tbx" was blocked from use because it is not from an identified developer.
 
 And you may find the button "Allow Anyway". Please hit the button with your risk. At second run, please hit button "Open" on the dialogue.
-
-## Options:
-
-| Option                | Description                | Default                                |
-|-----------------------|----------------------------|----------------------------------------|
-| `-announce-url`       | Announce URL               |                                        |
-| `-compact`            | Generate compact output    | false                                  |
-| `-compatibility-file` | Compatibility file         | catalogue/catalogue_compatibility.json |
-| `-current-base`       | Current recipe's base path | citron                                 |
-| `-current-path`       | Current CLI path           |                                        |
-| `-date`               | Effective date             |                                        |
-| `-former-base`        | Former recipe's base path  | recipe                                 |
-| `-former-path`        | Former CLI path            |                                        |
-| `-message-file`       | Message file path          | resources/messages/en/messages.json    |
 
 ## Common options:
 
@@ -72,6 +58,33 @@ And you may find the button "Allow Anyway". Please hit the button with your risk
 | `-skip-logging`    | Skip logging in the local storage                                                         | false                |
 | `-verbose`         | Show current operations for more detail.                                                  | false                |
 | `-workspace`       | Workspace path                                                                            |                      |
+
+# Results
+
+Report file path will be displayed last line of the command line output. If you missed command line output, please see path below. [job-id] will be the date/time of the run. Please see the latest job-id.
+
+| OS      | Path pattern                                | Example                                                |
+|---------|---------------------------------------------|--------------------------------------------------------|
+| Windows | `%HOMEPATH%\.toolbox\jobs\[job-id]\reports` | C:\Users\bob\.toolbox\jobs\20190909-115959.597\reports |
+| macOS   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /Users/bob/.toolbox/jobs/20190909-115959.597/reports   |
+| Linux   | `$HOME/.toolbox/jobs/[job-id]/reports`      | /home/bob/.toolbox/jobs/20190909-115959.597/reports    |
+
+## Report: entity
+
+Auth credential data
+The command will generate a report in three different formats. `entity.csv`, `entity.json`, and `entity.xlsx`.
+
+| Column      | Description      |
+|-------------|------------------|
+| key_name    | Application name |
+| scope       | Auth scope       |
+| peer_name   | Peer name        |
+| description | Description      |
+| timestamp   | Timestamp        |
+
+If you run with `-budget-memory low` option, the command will generate only JSON format report.
+
+In case of a report become large, a report in `.xlsx` format will be split into several chunks like follows; `entity_0000.xlsx`, `entity_0001.xlsx`, `entity_0002.xlsx`, ...
 
 # Proxy configuration
 
