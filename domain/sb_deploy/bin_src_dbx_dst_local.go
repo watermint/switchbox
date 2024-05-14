@@ -79,19 +79,32 @@ type binSrcDropboxDstLocalWorkerImpl struct {
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) IsUpdateRequired() (required bool, err error) {
+	l := z.ctl.Log()
 	localVersions, _, err := z.ListLocalVersions()
 	if err != nil {
+		l.Debug("Unable to list local versions", esl.Error(err))
 		return false, err
 	}
 	remoteVersions, _, err := z.ListRemoteVersions()
 	if err != nil {
+		l.Debug("Unable to list remote versions", esl.Error(err))
 		return false, err
 	}
+
+	l.Debug("Local versions", esl.Any("versions", localVersions))
+	l.Debug("Remote versions", esl.Any("versions", remoteVersions))
 
 	remoteVersionLatest := es_version.Max(remoteVersions...)
 	localVersionLatest := es_version.Max(localVersions...)
 
-	return !localVersionLatest.Equals(remoteVersionLatest), nil
+	l.Debug("Local latest version", esl.String("version", localVersionLatest.String()))
+	l.Debug("Remote latest version", esl.String("version", remoteVersionLatest.String()))
+
+	required = !localVersionLatest.Equals(remoteVersionLatest)
+
+	l.Debug("Update required", esl.Bool("required", required))
+
+	return required, nil
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) LocalLatestBinaryPath() string {
