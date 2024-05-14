@@ -1,6 +1,8 @@
 package sb_deploy
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"github.com/watermint/toolbox/domain/dropbox/api/dbx_client"
 	"github.com/watermint/toolbox/domain/dropbox/model/mo_file"
@@ -19,7 +21,7 @@ import (
 
 const (
 	BinSrcDropboxDstLocalVersionCacheLifecycle = 86400
-	BinSrcDropboxDstLocalVersionCacheName      = "sb_deploy-bin_src_dbx_dst_local_version_cache.json"
+	BinSrcDropboxDstLocalVersionCacheName      = "sb_deploy-bin_src_dbx_dst_local_version_cache"
 )
 
 // BinSrcDropboxDstLocalRecipe Deploy binary from Dropbox to local
@@ -77,19 +79,32 @@ type binSrcDropboxDstLocalWorkerImpl struct {
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) IsUpdateRequired() (required bool, err error) {
+	l := z.ctl.Log()
 	localVersions, _, err := z.ListLocalVersions()
 	if err != nil {
+		l.Debug("Unable to list local versions", esl.Error(err))
 		return false, err
 	}
 	remoteVersions, _, err := z.ListRemoteVersions()
 	if err != nil {
+		l.Debug("Unable to list remote versions", esl.Error(err))
 		return false, err
 	}
+
+	l.Debug("Local versions", esl.Any("versions", localVersions))
+	l.Debug("Remote versions", esl.Any("versions", remoteVersions))
 
 	remoteVersionLatest := es_version.Max(remoteVersions...)
 	localVersionLatest := es_version.Max(localVersions...)
 
-	return !localVersionLatest.Equals(remoteVersionLatest), nil
+	l.Debug("Local latest version", esl.String("version", localVersionLatest.String()))
+	l.Debug("Remote latest version", esl.String("version", remoteVersionLatest.String()))
+
+	required = !localVersionLatest.Equals(remoteVersionLatest)
+
+	l.Debug("Update required", esl.Bool("required", required))
+
+	return required, nil
 }
 
 func (z binSrcDropboxDstLocalWorkerImpl) LocalLatestBinaryPath() string {
@@ -175,9 +190,19 @@ func (z binSrcDropboxDstLocalWorkerImpl) GetLocalLatest() (binaryPath string, ve
 	return localVersionPaths[localVersionLatest.String()], localVersionLatest, nil
 }
 
+func (z binSrcDropboxDstLocalWorkerImpl) remoteVersionCacheName() string {
+	seeds := make([]string, 0)
+	seeds = append(seeds, z.recipe.SourceUrl)
+	seeds = append(seeds, z.recipe.Prefix)
+	seeds = append(seeds, z.recipe.Suffix)
+	seeds = append(seeds, z.recipe.BinaryName)
+	seed := sha256.Sum256([]byte(strings.Join(seeds, "-")))
+	return BinSrcDropboxDstLocalVersionCacheName + hex.EncodeToString(seed[:])[0:16] + ".json"
+}
+
 func (z binSrcDropboxDstLocalWorkerImpl) loadRemoteVersionsCache() (versions []es_version.Version, versionPaths map[string]string, found bool) {
 	l := z.ctl.Log()
-	cachePath := filepath.Join(z.ctl.Workspace().Cache(), BinSrcDropboxDstLocalVersionCacheName)
+	cachePath := filepath.Join(z.ctl.Workspace().Cache(), z.remoteVersionCacheName())
 	cacheData, err := os.ReadFile(cachePath)
 	if err != nil {
 		l.Debug("Unable to read cache", esl.Error(err))
@@ -202,7 +227,7 @@ func (z binSrcDropboxDstLocalWorkerImpl) saveRemoteVersionCache(versions []es_ve
 		return err
 	}
 
-	cachePath := filepath.Join(z.ctl.Workspace().Cache(), BinSrcDropboxDstLocalVersionCacheName)
+	cachePath := filepath.Join(z.ctl.Workspace().Cache(), z.remoteVersionCacheName())
 	cache := &BinSrcDropboxDstLocalRemoteVersionCache{
 		CacheTime:    time.Now().Unix(),
 		Versions:     versions,

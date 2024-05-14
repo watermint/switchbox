@@ -55,6 +55,10 @@ func (z *Link) Exec(c app_control.Control) error {
 		}
 	}
 
+	if err := worker.UpdateIfRequired(); err != nil {
+		return err
+	}
+
 	if shouldUpdate {
 		l.Info("Update required")
 		return worker.DeploySymlink()

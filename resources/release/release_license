@@ -9,6 +9,11 @@
       "release": 4,
       "key": "DIC75EGN7ITG7J2ABK6GRT6MEKMFAS6JRYH",
       "hashed_salt": "A7WEJTMO3TTY3CXZPWR5PNSJ7XGLMDT4"
+    },
+    {
+      "release": 5,
+      "key": "6CK35PMERLQCSULAPBM6UA22WD4BJOH332J",
+      "hashed_salt": "A7WEJTMO3TTY3CXZPWR5PNSJ7XGLMDT4"
     }
   ]
 }
