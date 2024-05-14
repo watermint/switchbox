@@ -197,6 +197,11 @@ func (z binSrcDropboxDstLocalWorkerImpl) loadRemoteVersionsCache() (versions []e
 
 func (z binSrcDropboxDstLocalWorkerImpl) saveRemoteVersionCache(versions []es_version.Version, versionPaths map[string]string) (err error) {
 	l := z.ctl.Log()
+	if err := os.MkdirAll(z.ctl.Workspace().Cache(), 0755); err != nil {
+		l.Debug("Unable to create cache directory", esl.Error(err))
+		return err
+	}
+
 	cachePath := filepath.Join(z.ctl.Workspace().Cache(), BinSrcDropboxDstLocalVersionCacheName)
 	cache := &BinSrcDropboxDstLocalRemoteVersionCache{
 		CacheTime:    time.Now().Unix(),
